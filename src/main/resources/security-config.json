@@ -1,0 +1,16 @@
+[
+  {
+    "pattern": "/api/posts/**",
+    "method": "GET",
+    "access": "permit-all"
+  },
+  {
+    "pattern": "/api/posts",
+    "method": "POST",
+    "access": "CREATE_POST"
+  },
+  {
+    "pattern": "**",
+    "access": "deny-all"
+  }
+]
