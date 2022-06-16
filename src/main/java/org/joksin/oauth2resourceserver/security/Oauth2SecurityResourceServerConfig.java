@@ -2,6 +2,7 @@ package org.joksin.oauth2resourceserver.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,6 +11,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 @Slf4j
 @EnableWebSecurity
+@EnableGlobalMethodSecurity (prePostEnabled = true)
 @ConditionalOnProperty (name = "security.type", havingValue = "oauth2")
 public class Oauth2SecurityResourceServerConfig extends WebSecurityConfigurerAdapter {
 
@@ -22,9 +24,13 @@ public class Oauth2SecurityResourceServerConfig extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        authorizationRequestInitializer.authorizeRequests(httpSecurity);
+//        authorizationRequestInitializer.authorizeRequests(httpSecurity);
         
         httpSecurity
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(this::configureJwtConfigurer))
                 .csrf()
                 .disable();
@@ -32,7 +38,7 @@ public class Oauth2SecurityResourceServerConfig extends WebSecurityConfigurerAda
 
     private void configureJwtConfigurer(OAuth2ResourceServerConfigurer.JwtConfigurer jwtConfigurer) {
         jwtConfigurer
-                .decoder(NimbusJwtDecoder.withJwkSetUri("https://oauth.mocklab.io/.well-known/jwks.json").build())
+                .decoder(NimbusJwtDecoder.withJwkSetUri("http://localhost:8081/realms/master/protocol/openid-connect/certs").build())
                 .jwtAuthenticationConverter(new CustomJwtAuthenticationConverter("sub"));
     }
 }

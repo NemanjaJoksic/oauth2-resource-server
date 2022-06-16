@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "3a191193-2828-4788-850c-02ef1bd067da",
 		"name": "Oauth2_samples",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3531732"
 	},
 	"item": [
 		{
@@ -49,6 +50,85 @@
 					"path": [
 						"api",
 						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/realms/master/protocol/openid-connect/token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "HYITcsf7FcsZwWtiwEIMYVfUP0GoLAbi",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "test_client",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/realms/master/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"realms",
+						"master",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/users/me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ0TnJqVU9UejJ4N244RWRlTEd1aTF3N2g0YVFaY012ejRkQTRYTnVFRndJIn0.eyJleHAiOjE2NTUzNjY5MTUsImlhdCI6MTY1NTM2Njg1NSwianRpIjoiNmI1ZDUzZjctMWFmOS00ODZjLTkzOTMtZDIwMzM2OTdmZWE4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgxL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiM2RkMjM4MWQtN2MwNi00ZDM5LTliMjktNjZkMzYzZDk1ZTMwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoidGVzdF9jbGllbnQiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbWFzdGVyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImNsaWVudElkIjoidGVzdF9jbGllbnQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImNsaWVudEhvc3QiOiIxNzIuMTcuMC4xIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LXRlc3RfY2xpZW50IiwiY2xpZW50QWRkcmVzcyI6IjE3Mi4xNy4wLjEifQ.TFJHLbHxlOHcKXJc3mTNKFH0TZLH4sIJj1eVqPm186Y_whO6BUjmFy7zh3Q6Oiqfy1TvfONanBH_cRFmKKKs9pVFm845ociCEllXyvIImIKJ3g38igPi1zgWy_rxhQbK2h8C6vWwajbEHhDOxUDPEwP1wycQdgdyQ3ceRjlWF_wcfBa5nJZpUT2_gWp775Dwfdcl7Q67l0euGpLoqWtbvJlix7jT3gZHH45FWtSnxT9q5Ut9vJPaTPQQ7Xdl6-IxM4IkUZIGDCqI0_X6RbKiwqHuoBKKzT1iCrHVah3W9TmE-LRB4zS9kzB2QLueKAQpNUiM-_wnBSgZThYvq6jDag",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/users/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"me"
 					]
 				}
 			},

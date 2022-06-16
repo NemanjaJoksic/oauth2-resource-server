@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,8 +29,8 @@ public class CustomJwtAuthenticationConverter implements Converter<Jwt, Abstract
     }
 
     private Collection<GrantedAuthority> convertJwtToGrantedAuthorityCollection(Jwt jwt) {
-        List<String> scopes = jwt.getClaimAsStringList("scope");
-        log.info("scopes: {}", scopes);
+        List<String> scopes = Arrays.asList(jwt.getClaimAsString("scope").split(" "));
+        log.info("Decoded scopes: {}", scopes);
         return scopes.stream().map(scope -> new SimpleGrantedAuthority(scope)).collect(Collectors.toList());
     }
 
